@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Social Media English - IG Simulation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Phone Container */
+        .phone-mockup {
+            width: 360px;
+            height: 700px;
+            background-color: #ffffff;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 8px solid #333;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* IG Header */
+        .header {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            border-bottom: 1px solid #dbdbdb;
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            font-family: 'Grand Hotel', cursive, sans-serif;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 20px;
+        }
+
+        /* Stories Section */
+        .stories-container {
+            display: flex;
+            padding: 10px;
+            gap: 12px;
+            border-bottom: 1px solid #efefef;
+            overflow-x: auto;
+            background: #fafafa;
+        }
+
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .story-ring {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .story-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        /* Main Content Feed */
+        .feed {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .post {
+            border-bottom: 1px solid #efefef;
+            margin-bottom: 10px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 250px;
+            background-color: #e1e8ed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            font-size: 22px;
+        }
+
+        .post-likes {
+            padding: 0 10px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .post-caption {
+            padding: 5px 10px 15px 10px;
+            font-size: 13px;
+        }
+
+        /* Bottom Navigation Bar */
+        .navbar {
+            height: 50px;
+            border-top: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #fff;
+            font-size: 22px;
+        }
+
+        /* Interactive Clickable Area Highlight */
+        .interactive {
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .interactive:active {
+            transform: scale(0.9);
+        }
+
+        /* Learning Modal Card */
+        .vocab-card {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            padding: 20px;
+            transition: bottom 0.3s ease-in-out;
+            z-index: 100;
+            border-top: 4px solid #dc2743;
+        }
+
+        .vocab-card.active {
+            bottom: 0;
+        }
+
+        .vocab-card h2 {
+            color: #bc1888;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .vocab-card h3 {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .vocab-card p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background-color: #cc2366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phone Container Simulation -->
+    <div class="phone-mockup">
+        
+        <!-- IG Header -->
+        <div class="header">
+            <div class="logo">Instagram</div>
+            <div class="header-icons">
+                <span class="interactive" onclick="showVocab('Notifications / Activity', '通知 / 動態', 'Shows when people like your posts or follow you.', '顯示誰按讚你的貼文或追蹤你。')">❤️</span>
+                <span class="interactive" onclick="showVocab('Direct Message (DM)', '私訊', 'Send private messages to your friends.', '傳送私人訊息給你的朋友。')">✈️</span>
+            </div>
+        </div>
+
+        <!-- Main Scrollable Area -->
+        <div class="feed">
+            
+            <!-- Stories Section -->
+            <div class="stories-container">
+                <div class="story interactive" onclick="showVocab('Story', '限時動態', 'Photos or short videos that disappear after 24 hours.', '會在24小時後自動消失的照片或短影片。')">
+                    <div class="story-ring"><div class="story-img">🐶</div></div>
+                    <span>Your Story</span>
+                </div>
+                <div class="story interactive" onclick="showVocab('Story', '限時動態', 'Photos or short videos that disappear after 24 hours.', '會在24小時後自動消失的照片或短影片。')">
+                    <div class="story-ring"><div class="story-img">🐱</div></div>
+                    <span>Classmate</span>
+                </div>
+                <div class="story interactive" onclick="showVocab('Story', '限時動態', 'Photos or short videos that disappear after 24 hours.', '會在24小時後自動消失的照片或短影片。')">
+                    <div class="story-ring"><div class="story-img">🐻</div></div>
+                    <span>Teacher</span>
+                </div>
+            </div>
+
+            <!-- Post Section -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="user-avatar">🐼</div>
+                    <span>english_learner_01</span>
+                </div>
+                
+                <div class="post-image interactive" onclick="showVocab('Post / Photo', '貼文 / 照片', 'A photo or video shared on your main page forever.', '分享在你的個人頁面上，永久留存的照片或影片。')">
+                    🎨
+                </div>
+
+                <div class="post-actions">
+                    <span class="interactive" onclick="showVocab('Like', '讚 / 喜歡', 'Click to show that you love this post.', '點擊表示你喜歡這個貼文。')">❤️</span>
+                    <span class="interactive" onclick="showVocab('Comment', '留言', 'Write a message under the post.', '在貼文下方寫下訊息或評論。')">💬</span>
+                    <span class="interactive" onclick="showVocab('Share', '分享', 'Send this post to other friends.', '將這個貼文轉發或分享給其他朋友。')">✈️</span>
+                </div>
+
+                <div class="post-likes interactive" onclick="showVocab('Likes Count', '按讚數', 'Shows how many people liked this post.', '顯示有多少人按讚了這個貼文。')">
+                    125 likes
+                </div>
+
+                <div class="post-caption">
+                    <b>english_learner_01</b> Having fun learning English with social media! 🚀
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <span class="interactive" onclick="showVocab('Home Feed', '首頁動態', 'The main page where you see all posts from people you follow.', '主畫面，你可以在這裡看到所有追蹤者的最新貼文。')">🏠</span>
+            <span class="interactive" onclick="showVocab('Search / Explore', '搜尋 / 探索', 'Search for friends or discover new photos and videos.', '搜尋朋友，或是探索並發現新的熱門照片與影片。')">🔍</span>
+            <span class="interactive" onclick="showVocab('Create / Add Post', '新增貼文', 'Click here to take or upload a new photo or video.', '點擊這裡可以拍照或上傳新的照片、影片。')">➕</span>
+            <span class="interactive" onclick="showVocab('Reels', '連續短影片', 'Watch fun, short vertical videos.', '觀看有趣且簡短的直式短影片。')">🎬</span>
+            <span class="interactive" onclick="showVocab('Profile', '個人檔案', 'Your own space showing your avatar, posts, and bio.', '你的個人主頁，展示頭像、貼文和個人簡介。')">👤</span>
+        </div>
+
+        <!-- Pop-up Learning Card -->
+        <div class="vocab-card" id="vocabCard">
+            <h2 id="vocabEng">Word Name</h2>
+            <h3 id="vocabChi">中文翻譯</h3>
+            <p><b>Function (功能):</b> <span id="vocabDescEng">Description</span></p>
+            <p><b>說明:</b> <span id="vocabDescChi">中文說明</span></p>
+            <button class="close-btn" onclick="closeVocab()">Got it! (我知道了)</button>
+        </div>
+
+    </div>
+
+    <script>
+        function showVocab(english, chinese, descEng, descChi) {
+            document.getElementById('vocabEng').innerText = english;
+            document.getElementById('vocabChi').innerText = chinese;
+            document.getElementById('vocabDescEng').innerText = descEng;
+            document.getElementById('vocabDescChi').innerText = descChi;
+            
+            document.getElementById('vocabCard').classList.add('active');
+        }
+
+        function closeVocab() {
+            document.getElementById('vocabCard').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
